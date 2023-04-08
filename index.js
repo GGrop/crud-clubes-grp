@@ -39,3 +39,13 @@ app.get('/team-creado', (req, res) => {
   });
 });
 
+app.get('/new-team', (req, res) => {
+  const teamsLength = JSON.parse(fs.readFileSync('./data/teams.db.json')).length;
+  res.render('new-team', {
+    layout: 'main',
+    data: {
+      teamsLength,
+    },
+  });
+});
+
