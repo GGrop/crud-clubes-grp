@@ -17,3 +17,14 @@ app.use(express.static(`${__dirname}/public`));
 app.use(express.static(`${__dirname}/assets`));
 app.use(express.static(`${__dirname}/uploads`));
 
+app.get('/', (req, res) => {
+  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
+  const teamsLength = teams.length;
+  res.render('teams', {
+    layout: 'main',
+    data: {
+      teams,
+      teamsLength,
+    },
+  });
+});
