@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th class="text-center" colspan="5">Teams</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data.teams as |team|}}
+        <tr class="">
+          <td class="text-center align-middle index-list" scope="row"><h5
+            >{{@index}}</h5></td>
+          <td class="text-center align-middle">
+            <img
+              class="list-img"
+              src="{{team.crestUrl}}"
+              alt="shield of club {{team.name}}"
+            />
+          </td>
+          <td class="text-center align-middle">
+            <h3>{{{team.name}}}</h3>
+          </td>
+          <td class="text-center align-middle">
+            <h3>{{{team.area.name}}}</h3>
+          </td>
+          <td class="text-center align-middle">
+            <a
+              href="/team/{{{team.tla}}}"
+              type="button"
+              class="btn btn-outline-dark"
+            >view</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
