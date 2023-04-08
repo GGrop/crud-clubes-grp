@@ -12,3 +12,8 @@ const multer = require('multer');
 const upload = multer({ dest: './uploads/shields' });
 app.engine('handlebars', exphb());
 app.set('view engine', 'handlebars');
+
+app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/assets`));
+app.use(express.static(`${__dirname}/uploads`));
+
