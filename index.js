@@ -72,3 +72,27 @@ app.get('/team/:tla', (req, res) => {
   });
 });
 
+app.get('/team/:tla/delete', (req, res) => {
+  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
+  const teamsLength = teams.length;
+  const teamTla = req.params.tla;
+  const oneTeam = teams.find((team) => team.tla === teamTla);
+  const {
+    name, tla, country = oneTeam.area.name, crestUrl, address, website, founded,
+  } = oneTeam;
+  res.render('team', {
+    layout: 'main',
+    data: {
+      name,
+      tla,
+      country,
+      crestUrl,
+      address,
+      website,
+      founded,
+      teamsLength,
+      delete: true,
+    },
+  });
+});
+
