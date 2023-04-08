@@ -1,0 +1,34 @@
+<form class="new-team-form mt-4 p-4 mx-auto no-select" action="/team/{{{data.tla}}}/edit" method="POST" enctype="multipart/form-data">
+  <h1>Edit Team:</h1>
+    <label for="shield">Shield: </label>
+  <div class="form-group">
+    <img src="{{{data.crestUrl}}}" class="edit-shield mb-3" alt="">
+    <input type="file" name="shield" id="shield">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Name:</label>
+    <input type="text" value="{{{data.name}}}" name="name" class="form-control" placeholder="Enter a name">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">TLA:</label>
+    <input type="text" value="{{{data.tla}}}" name="tla" class="form-control"  placeholder="Enter a TLA">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Country:</label>
+    <input type="text" value="{{{data.country}}}" name="country" class="form-control"  placeholder="Enter a TLA">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">address:</label>
+    <input type="text" value="{{{data.address}}}" name="address" class="form-control"  placeholder="Enter a adress">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">website:</label>
+    <input type="text" value="{{{data.website}}}" name="website" class="form-control" placeholder="Enter a website">
+  </div>
+    <div class="form-group">
+    <label for="exampleInputPassword1">founded:</label>
+    <input type="text" value="{{{data.founded}}}" name="founded" class="form-control" placeholder="Enter founded">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-secondary">Back</button>
+</form>
