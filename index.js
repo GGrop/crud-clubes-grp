@@ -28,3 +28,14 @@ app.get('/', (req, res) => {
     },
   });
 });
+app.get('/team-creado', (req, res) => {
+  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
+  const teamsLength = teams.length;
+  res.render('team-creado', {
+    layout: 'main',
+    data: {
+      teamsLength,
+    },
+  });
+});
+
