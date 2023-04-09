@@ -96,3 +96,26 @@ app.get('/team/:tla/delete', (req, res) => {
   });
 });
 
+app.get('/team/:tla/edit', (req, res) => {
+  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
+  const teamsLength = teams.length;
+  const teamTla = req.params.tla;
+  const oneTeam = teams.find((team) => team.tla === teamTla);
+  const {
+    name, tla, crestUrl, address, website, founded, country = oneTeam.area.name,
+  } = oneTeam;
+  res.render('team-edit', {
+    layout: 'main',
+    data: {
+      name,
+      tla,
+      country,
+      crestUrl,
+      address,
+      website,
+      founded,
+      teamsLength,
+    },
+  });
+});
+
