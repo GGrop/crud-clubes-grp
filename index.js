@@ -49,6 +49,48 @@ app.get('/new-team', (req, res) => {
   });
 });
 
+app.post('/new-team', upload.single('shield'), (req, res) => {
+  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
+  const {
+    name, tla, country, address, website, founded,
+  } = req.body;
+  const state = teams.find((team) => team.tla === tla.toUpperCase());
+  if (state) {
+    res.render('new-team', {
+      layout: 'main',
+      data: {
+        error: 'Ops! The team you want to create has an existing TLA, try it again',
+      },
+    });
+  } else {
+    const newTeam = {
+      area: {
+        name: country,
+      },
+      name,
+      tla: tla.toUpperCase(),
+      country,
+      crestUrl: `/shields/${req.file.filename}`,
+      address,
+      website,
+      founded,
+    };
+    teams.push(newTeam);
+    fs.writeFile('./data/teams.db.json', JSON.stringify(teams), (err) => {
+      res.status(200).json({
+        status: 'success',
+        data: {
+          teams,
+        },
+      });
+    });
+    res.redirect('/team-creado');
+  }
+  res.render('new-team', {
+    layout: 'main',
+  });
+});
+
 app.get('/team/:tla', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
