@@ -91,6 +91,19 @@ app.post('/new-team', upload.single('shield'), (req, res) => {
   });
 });
 
+app.post('/', (req, res) => {
+  const allTeams = JSON.parse(fs.readFileSync('./data/teams.json'));
+  fs.writeFile('./data/teams.db.json', JSON.stringify(allTeams), (err) => {
+    res.status(200).json({
+      status: 'success',
+      data: {
+        allTeams,
+      },
+    });
+  });
+  res.redirect('/');
+});
+
 app.get('/team/:tla', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
