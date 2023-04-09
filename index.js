@@ -224,3 +224,6 @@ app.post('/team/:tla/delete', (req, res) => {
   res.redirect('/');
 });
 
+app.listen(PORT, () => {
+  console.log('server is starting at port:', PORT);
+});
