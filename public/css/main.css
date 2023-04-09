@@ -1,0 +1,78 @@
+.container{
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+}
+.no-select{
+  user-select: none!important;
+}
+th{
+  margin: auto;
+}
+.list-img{
+  width: 60%;
+}
+td{
+  vertical-align: middle;
+  width: 35%;
+}
+h3{
+  font-size: 25px;
+}
+.index-list{
+  width: 7%;
+}
+.table .thead-dark th {
+  background-color: #212529d8!important;
+}
+tbody{
+  background-color: rgba(189, 189, 189, 0.652);
+}
+.card{
+  background-color: #212529d8!important;
+  color: white;
+  border-radius: 10px;
+}
+.list-group-item {
+  background-color: #21252900!important;
+}
+.my-alert{
+  width: 15%;
+}
+.bg-dark {
+  background-color: #212529d8!important;
+}
+form {
+  margin: 0;
+}
+.new-team-form{
+  color: white;
+  width: 20%;
+  background-color: #212529d8!important;
+  border-radius: 20px;
+}
+body {
+  background-image: url("../../wallpaper1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.my-created-alert{
+  margin: auto;
+  width: 40%;
+  margin-top: 50px;
+}
+.edit-shield{
+  width: 20%;
+}
+.my-footer{
+  position: fixed;
+  bottom: 0;
+  left: 10;
+  background-color: rgba(0, 0, 0, 0.575);
+  border-radius: 5px;
+  padding: 4px;
+  user-select: none;
+}
