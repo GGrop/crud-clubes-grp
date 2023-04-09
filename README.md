@@ -1,8 +1,7 @@
 # crud-clubes-grp
 
-Square it's a simple React Game, i tried to learn more about React at the same time that I played and this minigame is the result.
+Crud clubes its a Gran DT demo. in this demo we can see, add and delete teams of a teams list.
 
- #### Click here to play [🕹️Demo](https://square-q.vercel.app/Menu)
 
 ## Install
 
