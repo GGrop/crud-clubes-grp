@@ -6,7 +6,6 @@ const PORT = '8007';
 const fs = require('fs');
 const exphb = require('express-handlebars').engine;
 
-
 const multer = require('multer');
 
 const upload = multer({ dest: './uploads/shields' });
@@ -28,10 +27,10 @@ app.get('/', (req, res) => {
     },
   });
 });
-app.get('/team-creado', (req, res) => {
+app.get('/team-created', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
-  res.render('team-creado', {
+  res.render('team-created', {
     layout: 'main',
     data: {
       teamsLength,
@@ -84,7 +83,7 @@ app.post('/new-team', upload.single('shield'), (req, res) => {
         },
       });
     });
-    res.redirect('/team-creado');
+    res.redirect('/team-created');
   }
   res.render('new-team', {
     layout: 'main',
