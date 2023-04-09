@@ -174,3 +174,38 @@ app.get('/team/:tla/edit', (req, res) => {
   });
 });
 
+app.post('/team/:tla/edit', upload.single('shield'), (req, res) => {
+  const myTla = req.params.tla;
+  const {
+    name, tla, country, address, website, founded,
+  } = req.body;
+
+  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
+  const myTeam = teams.find((team) => team.tla === myTla);
+  const newTeams = teams.filter((team) => team.tla !== myTla);
+  const editedTeams = {
+    ...myTeam,
+    area: {
+      name: country,
+    },
+    name,
+    tla: tla.toUpperCase(),
+    address,
+    website,
+    founded,
+  };
+  if (req.file) {
+    editedTeams.crestUrl = `/shields/${req.file.filename}`;
+  }
+  newTeams.push(editedTeams);
+  fs.writeFileSync('./data/teams.db.json', JSON.stringify(newTeams), (err) => {
+    res.status(200).json({
+      status: 'success',
+      data: {
+        editedTeams,
+      },
+    });
+  });
+  res.redirect('/');
+});
+
