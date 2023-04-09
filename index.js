@@ -209,3 +209,18 @@ app.post('/team/:tla/edit', upload.single('shield'), (req, res) => {
   res.redirect('/');
 });
 
+app.post('/team/:tla/delete', (req, res) => {
+  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
+  const teamTla = req.params.tla;
+  const newTeams = teams.filter((team) => team.tla !== teamTla);
+  fs.writeFile('./data/teams.db.json', JSON.stringify(newTeams), (err) => {
+    res.status(200).json({
+      status: 'success',
+      data: {
+        newTeams,
+      },
+    });
+  });
+  res.redirect('/');
+});
+
