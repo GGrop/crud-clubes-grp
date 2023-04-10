@@ -3,20 +3,15 @@
 Crud clubes its a Gran DT demo. in this demo we can see, add and delete teams of a teams list.
 
 
-## Install
+## Install and Run
 
 ```bash
+  git clone https://github.com/GGrop/crud-clubes-grp
   npm install
-```
-
-## Run
-
-```bash
   nodemon index.js
 ```
 
-## Tecnologies
-
+## Tech Stack
 
 ```bash
   Node.js
