@@ -17,6 +17,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use(express.static(`${__dirname}/assets`));
 app.use(express.static(`${__dirname}/uploads`));
 
+// interfaz 10 de especificidad
 app.get('/', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
@@ -28,6 +29,81 @@ app.get('/', (req, res) => {
     },
   });
 });
+
+// interfaz
+app.get('/team/:tla', (req, res) => {
+  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
+  const teamsLength = teams.length;
+  const teamTla = req.params.tla;
+  const oneTeam = teams.find((team) => team.tla === teamTla);
+  const {
+    name, tla, crestUrl, address, website, founded, country = oneTeam.area.name,
+  } = oneTeam;
+  res.render('team', {
+    layout: 'main',
+    data: {
+      name,
+      tla,
+      country,
+      crestUrl,
+      address,
+      website,
+      founded,
+      teamsLength,
+    },
+  });
+});
+
+// interfaz
+app.get('/team/:tla/delete', (req, res) => {
+  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
+  const teamsLength = teams.length;
+  const teamTla = req.params.tla;
+  const oneTeam = teams.find((team) => team.tla === teamTla);
+  const {
+    name, tla, country = oneTeam.area.name, crestUrl, address, website, founded,
+  } = oneTeam;
+  res.render('team', {
+    layout: 'main',
+    data: {
+      name,
+      tla,
+      country,
+      crestUrl,
+      address,
+      website,
+      founded,
+      teamsLength,
+      delete: true,
+    },
+  });
+});
+
+// interfaz
+app.get('/team/:tla/edit', (req, res) => {
+  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
+  const teamsLength = teams.length;
+  const teamTla = req.params.tla;
+  const oneTeam = teams.find((team) => team.tla === teamTla);
+  const {
+    name, tla, crestUrl, address, website, founded, country = oneTeam.area.name,
+  } = oneTeam;
+  res.render('team-edit', {
+    layout: 'main',
+    data: {
+      name,
+      tla,
+      country,
+      crestUrl,
+      address,
+      website,
+      founded,
+      teamsLength,
+    },
+  });
+});
+
+// interfaz
 app.get('/team-created', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
@@ -39,6 +115,7 @@ app.get('/team-created', (req, res) => {
   });
 });
 
+// interfaz
 app.get('/new-team', (req, res) => {
   const teamsLength = JSON.parse(fs.readFileSync('./data/teams.db.json')).length;
   res.render('new-team', {
@@ -48,7 +125,7 @@ app.get('/new-team', (req, res) => {
     },
   });
 });
-
+// interfaz y recurso tengo q separar
 app.post('/new-team', upload.single('shield'), (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const {
@@ -91,6 +168,7 @@ app.post('/new-team', upload.single('shield'), (req, res) => {
   });
 });
 
+// recurso
 app.post('/', (req, res) => {
   const allTeams = JSON.parse(fs.readFileSync('./data/teams.json'));
   fs.writeFile('./data/teams.db.json', JSON.stringify(allTeams), (err) => {
@@ -104,76 +182,7 @@ app.post('/', (req, res) => {
   res.redirect('/');
 });
 
-app.get('/team/:tla', (req, res) => {
-  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
-  const teamsLength = teams.length;
-  const teamTla = req.params.tla;
-  const oneTeam = teams.find((team) => team.tla === teamTla);
-  const {
-    name, tla, crestUrl, address, website, founded, country = oneTeam.area.name,
-  } = oneTeam;
-  res.render('team', {
-    layout: 'main',
-    data: {
-      name,
-      tla,
-      country,
-      crestUrl,
-      address,
-      website,
-      founded,
-      teamsLength,
-    },
-  });
-});
-
-app.get('/team/:tla/delete', (req, res) => {
-  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
-  const teamsLength = teams.length;
-  const teamTla = req.params.tla;
-  const oneTeam = teams.find((team) => team.tla === teamTla);
-  const {
-    name, tla, country = oneTeam.area.name, crestUrl, address, website, founded,
-  } = oneTeam;
-  res.render('team', {
-    layout: 'main',
-    data: {
-      name,
-      tla,
-      country,
-      crestUrl,
-      address,
-      website,
-      founded,
-      teamsLength,
-      delete: true,
-    },
-  });
-});
-
-app.get('/team/:tla/edit', (req, res) => {
-  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
-  const teamsLength = teams.length;
-  const teamTla = req.params.tla;
-  const oneTeam = teams.find((team) => team.tla === teamTla);
-  const {
-    name, tla, crestUrl, address, website, founded, country = oneTeam.area.name,
-  } = oneTeam;
-  res.render('team-edit', {
-    layout: 'main',
-    data: {
-      name,
-      tla,
-      country,
-      crestUrl,
-      address,
-      website,
-      founded,
-      teamsLength,
-    },
-  });
-});
-
+// recurso
 app.post('/team/:tla/edit', upload.single('shield'), (req, res) => {
   const myTla = req.params.tla;
   const {
@@ -208,8 +217,11 @@ app.post('/team/:tla/edit', upload.single('shield'), (req, res) => {
   });
   res.redirect('/');
 });
+
 // diferenciar entre interface y recurso interfaz--> app
 // recurso quedaria igual
+
+// recurso
 app.post('/team/:tla/delete', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamTla = req.params.tla;
