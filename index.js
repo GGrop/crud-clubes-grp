@@ -208,7 +208,8 @@ app.post('/team/:tla/edit', upload.single('shield'), (req, res) => {
   });
   res.redirect('/');
 });
-
+// diferenciar entre interface y recurso interfaz--> app
+// recurso quedaria igual
 app.post('/team/:tla/delete', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamTla = req.params.tla;
