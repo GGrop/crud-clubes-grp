@@ -144,7 +144,7 @@ app.post('/new-team', upload.single('shield'), (req, res) => {
         },
       });
     });
-    res.redirect('/team-created');
+    res.redirect('app/team-created');
   }
   res.render('new-team', {
     layout: 'main',
