@@ -19,7 +19,7 @@ app.use(express.static(`${__dirname}/uploads`));
 
 // interfaz 10 de especificidad
 // interfaz
-app.get('/team/:tla', (req, res) => {
+app.get('/app/team/:tla/delete', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
   const teamTla = req.params.tla;
@@ -43,7 +43,7 @@ app.get('/team/:tla', (req, res) => {
 });
 
 // interfaz
-app.get('/team/:tla/delete', (req, res) => {
+app.get('/app/team/:tla/edit', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
   const teamTla = req.params.tla;
@@ -68,7 +68,7 @@ app.get('/team/:tla/delete', (req, res) => {
 });
 
 // interfaz
-app.get('/team/:tla/edit', (req, res) => {
+app.get('/app/team/:tla', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
   const teamTla = req.params.tla;
@@ -92,7 +92,7 @@ app.get('/team/:tla/edit', (req, res) => {
 });
 
 // interfaz
-app.get('/team-created', (req, res) => {
+app.get('/app/team-created', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
   res.render('team-created', {
@@ -104,8 +104,8 @@ app.get('/team-created', (req, res) => {
 });
 
 // interfaz
-app.get('/new-team', (req, res) => {
   const teamsLength = JSON.parse(fs.readFileSync('./data/teams.db.json')).length;
+app.get('/app/new-team/error', (req, res) => {
   res.render('new-team', {
     layout: 'main',
     data: {
@@ -153,6 +153,15 @@ app.post('/new-team', upload.single('shield'), (req, res) => {
   }
   res.render('new-team', {
     layout: 'main',
+app.get('/app', (req, res) => {
+  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
+  const teamsLength = teams.length;
+  res.render('teams', {
+    layout: 'main',
+    data: {
+      teams,
+      teamsLength,
+    },
   });
 });
 
