@@ -146,8 +146,21 @@ app.post('/new-team', upload.single('shield'), (req, res) => {
     });
     res.redirect('app/team-created');
   }
+});
+
+// interfaz 3
+app.get('/app/new-team', (req, res) => {
+  const teamsLength = JSON.parse(fs.readFileSync('./data/teams.db.json')).length;
   res.render('new-team', {
     layout: 'main',
+    data: {
+      teamsLength,
+
+    },
+  });
+});
+
+// interfaz 0 de especificidad
 app.get('/app', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
