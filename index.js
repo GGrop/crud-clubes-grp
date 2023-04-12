@@ -63,7 +63,6 @@ app.get('/app/team/:tla/edit', (req, res) => {
       website,
       founded,
       teamsLength,
-      delete: true,
     },
   });
 });
