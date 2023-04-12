@@ -52,7 +52,7 @@ app.get('/app/team/:tla/edit', (req, res) => {
   const {
     name, tla, crestUrl, address, website, founded, country = oneTeam.area.name,
   } = oneTeam;
-  res.render('team', {
+  res.render('team-edit', {
     layout: 'main',
     data: {
       name,
