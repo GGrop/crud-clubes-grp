@@ -76,7 +76,7 @@ app.get('/app/team/:tla', (req, res) => {
   const {
     name, tla, crestUrl, address, website, founded, country = oneTeam.area.name,
   } = oneTeam;
-  res.render('team-edit', {
+  res.render('team', {
     layout: 'main',
     data: {
       name,
