@@ -121,12 +121,7 @@ app.post('/new-team', upload.single('shield'), (req, res) => {
   } = req.body;
   const state = teams.find((team) => team.tla === tla.toUpperCase());
   if (state) {
-    res.render('new-team', {
-      layout: 'main',
-      data: {
-        error: 'Ops! The team you want to create has an existing TLA, try it again',
-      },
-    });
+    res.redirect('/app/new-team/error');
   } else {
     const newTeam = {
       area: {
