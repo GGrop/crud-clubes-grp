@@ -38,6 +38,7 @@ app.get('/app/team/:tla/delete', (req, res) => {
       website,
       founded,
       teamsLength,
+      delete: true,
     },
   });
 });
