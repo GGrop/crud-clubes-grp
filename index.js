@@ -25,7 +25,7 @@ app.get('/app/team/:tla/delete', (req, res) => {
   const teamTla = req.params.tla;
   const oneTeam = teams.find((team) => team.tla === teamTla);
   const {
-    name, tla, crestUrl, address, website, founded, country = oneTeam.area.name,
+    name, tla, country = oneTeam.area.name, crestUrl, address, website, founded,
   } = oneTeam;
   res.render('team', {
     layout: 'main',
@@ -49,7 +49,7 @@ app.get('/app/team/:tla/edit', (req, res) => {
   const teamTla = req.params.tla;
   const oneTeam = teams.find((team) => team.tla === teamTla);
   const {
-    name, tla, country = oneTeam.area.name, crestUrl, address, website, founded,
+    name, tla, crestUrl, address, website, founded, country = oneTeam.area.name,
   } = oneTeam;
   res.render('team', {
     layout: 'main',
