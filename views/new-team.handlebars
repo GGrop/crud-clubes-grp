@@ -1,37 +1,78 @@
 {{#if data.error}}
   <div class="alert alert-danger my-alert mt-4 mx-auto" role="alert">
-  {{{data.error}}}
-</div>
+    {{{data.error}}}
+  </div>
 {{/if}}
-<form class="new-team-form mt-4 p-4 mx-auto no-select" action="/new-team" method="POST" enctype="multipart/form-data">
+<form
+  class="new-team-form mt-4 p-4 mx-auto no-select"
+  action="/new-team"
+  method="POST"
+  enctype="multipart/form-data"
+>
   <h1>New team:</h1>
   <div class="form-group">
     <label>Name:</label>
-    <input type="text" name="name" required  class="form-control" placeholder="Enter a name">
+    <input
+      type="text"
+      name="name"
+      required
+      class="form-control"
+      placeholder="Enter a name"
+    />
   </div>
   <div class="form-group">
     <label>TLA:</label>
-    <input type="text" name="tla" required class="form-control" placeholder="Enter a TLA">
+    <input
+      type="text"
+      name="tla"
+      required
+      class="form-control"
+      placeholder="Enter a TLA"
+    />
   </div>
   <div class="form-group">
     <label>Country:</label>
-    <input type="text" name="country" required class="form-control" placeholder="Enter a TLA">
+    <input
+      type="text"
+      name="country"
+      required
+      class="form-control"
+      placeholder="Enter a TLA"
+    />
   </div>
   <div class="form-group">
     <label>address:</label>
-    <input type="text" name="address" required class="form-control" placeholder="Enter a adress">
+    <input
+      type="text"
+      name="address"
+      required
+      class="form-control"
+      placeholder="Enter a adress"
+    />
   </div>
   <div class="form-group">
     <label>website:</label>
-    <input type="text" name="website" required class="form-control"  placeholder="Enter a website">
+    <input
+      type="text"
+      name="website"
+      required
+      class="form-control"
+      placeholder="Enter a website"
+    />
   </div>
-    <div class="form-group">
+  <div class="form-group">
     <label>founded:</label>
-    <input type="text" name="founded" required class="form-control" placeholder="Enter founded">
+    <input
+      type="text"
+      name="founded"
+      required
+      class="form-control"
+      placeholder="Enter founded"
+    />
   </div>
   <div class="form-group">
     <label for="shield">Shield: </label>
-    <input type="file" name="shield" required id="shield">
+    <input type="file" name="shield" required id="shield" />
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

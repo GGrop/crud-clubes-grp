@@ -1,9 +1,75 @@
-//submit prevent default
-//en header declaro metodo
+//submit prevent default //en header declaro metodo
 
+<div>
+  {{#if data.delete}}
+    <form id="delete-user-form" onsubmit="deleteTeam(event)">
+      <div class="alert alert-danger mx-auto mt-2 my-alert" role="alert">
+        Are you sure you want to delete this team?
+        <button
+          type="submit"
+          class="btn btn-danger"
+          id="tlabutton"
+          name="tla"
+          value="{{{data.tla}}}"
+        >Yes</button>
+        {{! <input type="text" id="id-usuario" name="id-usuario" required> }}
+        <a
+          href="/team/{{{data.tla}}}"
+          type="button"
+          class="btn btn-secondary"
+        >No</a>
+      </div>
+    </form>
+  {{/if}}
 
+  <div class="card mt-4 mx-auto" style="width: 18rem;">
+    <img
+      class="card-img-top"
+      src="{{{data.crestUrl}}}"
+      alt="shield of club {{{data.name}}}"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{{data.name}}}</h5>
+      <p class="card-text" id="tla">{{{data.tla}}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{{data.country}}}</li>
+      <li class="list-group-item">{{{data.address}}}</li>
+      <a href="{{{data.website}}}">
+        <li class="list-group-item">{{{data.website}}}</li>
+      </a>
+      <li class="list-group-item">
+        <p>Founded:</p>{{{data.founded}}}
+      </li>
+    </ul>
+    <div class="card-body">
+      <a href="/app/team/{{{data.tla}}}/edit" class="card-link"><button
+          type="button"
+          class="btn btn-primary"
+        >Edit</button></a>
+      <a href="/app/team/{{{data.tla}}}/delete" class="card-link"><button
+          type="button"
+          class="btn btn-danger"
+        >Delete</button></a>
+    </div>
+  </div>
 
-{{#if data.delete}}
+  <script>
+    function deleteTeam(event) {
+      event.preventDefault(); 
+      const form =event.target;
+      const tla = document.querySelector('#tla').textContent
+      fetch(`/team/${tla}/delete`, { method: "DELETE" }) 
+      .then(response => { 
+        if(!response.ok) {
+          throw new Error(response.statusText); 
+        }
+          form.reset(); })
+      .catch(error => { alert(`Ocurrió un error al intentar eliminar el usuario:${error.message}`); }); }
+  </script>
+</div>
+
+{{!-- {{#if data.delete}}
   <form action="/team/{{{data.tla}}}/delete" method="POST">
     <div class="alert alert-danger mx-auto mt-2 my-alert" role="alert">
       Are you sure you want to delete this team?
@@ -34,7 +100,7 @@
     </li>
   </ul>
   <div class="card-body">
-    <a href="/team/{{{data.tla}}}/edit" class="card-link"><button type="button" class="btn btn-primary">Edit</button></a>
-    <a href="/team/{{{data.tla}}}/delete" class="card-link"><button type="button" class="btn btn-danger">Delete</button></a>
+    <a href="/app/team/{{{data.tla}}}/edit" class="card-link"><button type="button" class="btn btn-primary">Edit</button></a>
+    <a href="/app/team/{{{data.tla}}}/delete" class="card-link"><button type="button" class="btn btn-danger">Delete</button></a>
   </div>
-</div>
+</div> --}}
