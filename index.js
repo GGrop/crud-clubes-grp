@@ -18,7 +18,6 @@ app.use(express.static(`${__dirname}/assets`));
 app.use(express.static(`${__dirname}/uploads`));
 
 // interfaz 10 de especificidad
-// interfaz
 app.get('/app/team/:tla/delete', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
@@ -43,7 +42,7 @@ app.get('/app/team/:tla/delete', (req, res) => {
   });
 });
 
-// interfaz
+// interfaz 10
 app.get('/app/team/:tla/edit', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
@@ -67,7 +66,7 @@ app.get('/app/team/:tla/edit', (req, res) => {
   });
 });
 
-// interfaz
+// interfaz interfaz 5 de especificidad
 app.get('/app/team/:tla', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
@@ -91,7 +90,7 @@ app.get('/app/team/:tla', (req, res) => {
   });
 });
 
-// interfaz
+// interfaz 3
 app.get('/app/team-created', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const teamsLength = teams.length;
@@ -113,7 +112,8 @@ app.get('/app/new-team/error', (req, res) => {
     },
   });
 });
-// interfaz y recurso tengo q separar
+
+// interfaz y recurso 3 tengo q separar
 app.post('/new-team', upload.single('shield'), (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
   const {
