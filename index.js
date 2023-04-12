@@ -18,18 +18,6 @@ app.use(express.static(`${__dirname}/assets`));
 app.use(express.static(`${__dirname}/uploads`));
 
 // interfaz 10 de especificidad
-app.get('/', (req, res) => {
-  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
-  const teamsLength = teams.length;
-  res.render('teams', {
-    layout: 'main',
-    data: {
-      teams,
-      teamsLength,
-    },
-  });
-});
-
 // interfaz
 app.get('/team/:tla', (req, res) => {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
@@ -167,6 +155,14 @@ app.post('/new-team', upload.single('shield'), (req, res) => {
     layout: 'main',
   });
 });
+
+app.get('/', (req, res) => {
+  res.redirect('/app');
+});
+
+/// /////////////////////// RECURSOOS //////////////////////////////////////////
+/// /////////////////////// RECURSOOS //////////////////////////////////////////
+/// /////////////////////// RECURSOOS //////////////////////////////////////////
 
 // recurso
 app.post('/', (req, res) => {
