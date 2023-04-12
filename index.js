@@ -102,14 +102,14 @@ app.get('/app/team-created', (req, res) => {
     },
   });
 });
-
-// interfaz
-  const teamsLength = JSON.parse(fs.readFileSync('./data/teams.db.json')).length;
 app.get('/app/new-team/error', (req, res) => {
+  const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
+  const teamsLength = teams.length;
   res.render('new-team', {
     layout: 'main',
     data: {
       teamsLength,
+      error: 'Ops! The team you want to create has an existing TLA, try it again',
     },
   });
 });
