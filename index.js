@@ -234,20 +234,26 @@ app.post('/team/:tla/edit', upload.single('shield'), (req, res) => {
 // diferenciar entre interface y recurso interfaz--> app
 // recurso quedaria igual
 
-// recurso
-app.post('/team/:tla/delete', (req, res) => {
+function deleteTeam(tla) {
   const teams = JSON.parse(fs.readFileSync('./data/teams.db.json'));
-  const teamTla = req.params.tla;
-  const newTeams = teams.filter((team) => team.tla !== teamTla);
-  fs.writeFile('./data/teams.db.json', JSON.stringify(newTeams), (err) => {
-    res.status(200).json({
-      status: 'success',
-      data: {
-        newTeams,
-      },
-    });
-  });
-  res.redirect('/');
+  const index = teams.findIndex((team) => team.tla === tla);
+  if (index !== -1) {
+    teams.splice(index, 1);
+    fs.writeFileSync('./data/teams.db.json', JSON.stringify(teams));
+    return true;
+  }
+  return false;
+}
+
+// recurso HECHOOO
+app.delete('/team/:tla/delete', (req, res) => {
+  const { tla } = req.params;
+  const eliminado = deleteTeam(tla);
+  if (eliminado) {
+    res.status(200).json({ mensaje: 'El usuario se eliminó correctamente.' });
+  } else {
+    res.status(404).json({ mensaje: 'No se encontró el usuario.' });
+  }
 });
 
 app.listen(PORT, () => {
